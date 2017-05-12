@@ -25,12 +25,9 @@ services:
       SENTRY_MEMCACHED_HOST: memcached
       SENTRY_REDIS_HOST: redis
       SENTRY_POSTGRES_HOST: postgres
-      SENTRY_EMAIL_HOST: smtp
+      SENTRY_EMAIL_HOST:
     volumes:
       - sentry-data:/var/lib/sentry/files
-
-  smtp:
-    image: tianon/exim4
 
   memcached:
     image: memcached:1.4
@@ -49,7 +46,6 @@ services:
       - redis
       - postgres
       - memcached
-      - smtp
     ports:
       - '9000:9000'
 
@@ -60,7 +56,6 @@ services:
       - redis
       - postgres
       - memcached
-      - smtp
 
   worker:
     extends: base
@@ -69,4 +64,3 @@ services:
       - redis
       - postgres
       - memcached
-      - smtp
