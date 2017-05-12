@@ -28,6 +28,7 @@ services:
       SENTRY_REDIS_HOST: redis
       SENTRY_POSTGRES_HOST: postgres
       SENTRY_EMAIL_HOST:
+      SENTRY_SMTP_HOSTNAME:
     volumes:
       - sentry-data:/var/lib/sentry/files
 
