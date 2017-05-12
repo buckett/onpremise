@@ -7,6 +7,10 @@ server {
 	ssl_certificate /etc/ssl/nginx/${NGINX_HOST}.crt;
 	ssl_certificate_key /etc/ssl/nginx/${NGINX_HOST}.key;
 
+	# We get logs from the web container already
+        access_log  off;
+
+
 	root /usr/share/nginx/www;
 	index index.php index.html index.htm;
 
