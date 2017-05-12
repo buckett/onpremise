@@ -32,6 +32,13 @@ If you'd like to protect your Sentry install with SSL/TLS, there are
 fantastic SSL/TLS proxies like [HAProxy](http://www.haproxy.org/)
 and [Nginx](http://nginx.org/).
 
+To copy files into the SSL volumne do:
+
+    compose up -d nginx
+    docker cp certs/. onpremise_nginx_1:/etc/ssl/nginx
+
+You need a trailing `/.` on the source to copy the files without the folder.
+
 ## Resources
 
  * [Documentation](https://docs.sentry.io/server/installation/docker/)

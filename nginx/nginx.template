@@ -1,0 +1,43 @@
+server {
+	listen   80; ## listen for ipv4; this line is default and implied
+	listen   [::]:80 default ipv6only=on; ## listen for ipv6
+
+	# Go for SSL
+	listen 443 ssl;
+	ssl_certificate /etc/ssl/nginx/${NGINX_HOST}.crt;
+	ssl_certificate_key /etc/ssl/nginx/${NGINX_HOST}.key;
+
+	root /usr/share/nginx/www;
+	index index.php index.html index.htm;
+
+	# Make site accessible from http://localhost/
+	server_name ${NGINX_HOST};
+
+	#location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to index.html
+		#try_files $uri $uri/ /index.html;
+		# Uncomment to enable naxsi on this location
+		# include /etc/nginx/naxsi.rules
+	#}
+
+  	#### SENTRY RELATED ####
+
+  	# Any requests coming from a sentry page for static content gets rewritten
+	#if ($http_referer ~ <TOP_LEVEL_DOMAIN>.com/sentry) {
+		#rewrite /_static/(.*)$ /sentry/_static/$1 break;
+	#}
+
+	location / {
+		proxy_pass http://web:9000;
+		proxy_redirect	off;
+
+		proxy_set_header	Host	$host;
+		proxy_set_header	X-Real-IP	$remote_addr;
+		proxy_set_header	X-Forwarded-For	$proxy_add_x_forwarded_for;
+		proxy_set_header	X-Forwarded-Proto	$scheme;
+	}
+	
+	#### END SENTRY RELATED ####
+
+}
