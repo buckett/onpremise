@@ -1,0 +1,10 @@
+# Copy this to .env and setup
+SENTRY_SECRET_KEY=
+SENTRY_EMAIL_HOST=smtp.ox.ac.uk
+SENTRY_SMTP_HOSTNAME=sentry.it.ox.ac.uk
+SENTRY_SERVER_EMAIL=sentry@it.ox.ac.uk
+
+GITHUB_APP_ID=2007d8b8d63fa747c9e5
+GITHUB_API_SECRET=
+
+NGINX_HOST=sentry.it.ox.ac.uk
